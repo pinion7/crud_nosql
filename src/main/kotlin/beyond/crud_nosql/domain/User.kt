@@ -1,40 +1,38 @@
-package beyond.crud_sql.domain
+package beyond.crud_nosql.domain
 
-import beyond.crud_sql.domain.base.BaseTimeEntity
-import org.hibernate.annotations.BatchSize
-import org.hibernate.annotations.GenericGenerator
+import beyond.crud_nosql.domain.base.BaseDocumentEntity
+import org.bson.types.ObjectId
+import org.springframework.data.annotation.Id
+import org.springframework.data.mongodb.core.index.Indexed
+import org.springframework.data.mongodb.core.mapping.Document
+import org.springframework.data.mongodb.core.mapping.Field
+import org.springframework.data.mongodb.core.mapping.MongoId
 import java.util.*
-import javax.persistence.*
 
-
-@Entity
-@Table(name = "Users")
-class User(email: String, password: String, nickname: String) : BaseTimeEntity() {
+@Document
+class User(email: String, password: String, nickname: String): BaseDocumentEntity() {
 
     @Id
-    @GeneratedValue(generator = "uuid-gen", strategy = GenerationType.IDENTITY)
-    @GenericGenerator(name = "uuid-gen", strategy = "uuid2")
-    @Column(updatable = false)
-    val id: UUID? = null
+    var id: ObjectId? = ObjectId.get()
 
-    @Column(unique = true)
+    @Field
+    @Indexed(unique = true)
     var email: String = email
         protected set;
 
-    @Column
+    @Field
     var password: String = password
         protected set;
 
-    @Column(unique = true)
+    @Field
     var nickname: String = nickname
         protected set;
 
-    @Column
+    @Field
     var quit: Boolean = false
 
-    @OneToMany(mappedBy = "user")
-    var posts: MutableList<Post> = mutableListOf()
-        protected set;
+//    var posts: MutableList<Post> = mutableListOf()
+//        protected set;
 
     fun updateNickname(nickname: String) {
         this.nickname = nickname
@@ -44,7 +42,7 @@ class User(email: String, password: String, nickname: String) : BaseTimeEntity()
         this.quit = true
     }
 
-    override fun toString(): String {
-        return "User(id=$id, email='$email', password='$password', nickname='$nickname', posts=$posts)"
-    }
+//    override fun toString(): String {
+//        return "User(id=$id, email='$email', password='$password', nickname='$nickname', posts=$posts)"
+//    }
 }

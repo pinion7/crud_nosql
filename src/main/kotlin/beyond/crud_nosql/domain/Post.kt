@@ -1,39 +1,33 @@
-package beyond.crud_sql.domain
+package beyond.crud_nosql.domain
 
-import beyond.crud_sql.domain.base.BaseTimeEntity
-import beyond.crud_sql.dto.request.UpdatePostRequestDto
-import com.fasterxml.jackson.annotation.JsonIgnore
-import org.hibernate.annotations.GenericGenerator
-import java.util.*
-import javax.persistence.*
+import beyond.crud_nosql.domain.base.BaseDocumentEntity
+import org.bson.types.ObjectId
+import org.springframework.data.mongodb.core.mapping.DBRef
+import org.springframework.data.mongodb.core.mapping.Document
+import org.springframework.data.mongodb.core.mapping.Field
+import org.springframework.data.mongodb.core.mapping.MongoId
 
-@Entity
-@Table(name = "Posts")
-class Post(title: String, content: String, user: User) : BaseTimeEntity() {
+@Document
+class Post(title: String, content: String, user: User) : BaseDocumentEntity() {
 
-    @Id
-    @GeneratedValue(generator = "uuid-gen", strategy = GenerationType.IDENTITY)
-    @GenericGenerator(name = "uuid-gen", strategy = "uuid2")
-    @Column(updatable = false)
-    val id: UUID? = null
+    @MongoId
+    val id: ObjectId? = null
 
-    @Column
+    @Field
     var title: String = title
         protected set
 
-    @Column
+    @Field
     var content: String = content
         protected set
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @DBRef
     var user: User = user
         protected set
 
-    fun updatePostFields(params: UpdatePostRequestDto) {
-        val (title, content) = params
-        if (title != null) this.title = title
-        if (content != null) this.content = content
-    }
+//    fun updatePostFields(params: UpdatePostRequestDto) {
+//        val (title, content) = params
+//        if (title != null) this.title = title
+//        if (content != null) this.content = content
+//    }
 }
