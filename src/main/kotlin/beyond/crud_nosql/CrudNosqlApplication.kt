@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 @SpringBootApplication
 @EnableMongoAuditing
-@EnableMongoRepositories
+@EnableMongoRepositories()
 class CrudNosqlApplication
 
 fun main(args: Array<String>) {

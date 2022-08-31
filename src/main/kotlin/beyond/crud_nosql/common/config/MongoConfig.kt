@@ -31,5 +31,4 @@ class MongoConfig {
     fun transactionManager(databaseFactory: SimpleMongoClientDatabaseFactory): MongoTransactionManager {
         return MongoTransactionManager(databaseFactory)
     }
-
 }

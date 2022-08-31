@@ -7,42 +7,40 @@ import org.springframework.data.mongodb.core.index.Indexed
 import org.springframework.data.mongodb.core.mapping.Document
 import org.springframework.data.mongodb.core.mapping.Field
 import org.springframework.data.mongodb.core.mapping.MongoId
-import java.util.*
 
 @Document
-class User(email: String, password: String, nickname: String): BaseDocumentEntity() {
-
-    @Id
-    var id: ObjectId? = ObjectId.get()
-
+data class User(
     @Field
     @Indexed(unique = true)
-    var email: String = email
-        protected set;
+    val email: String,
 
     @Field
-    var password: String = password
-        protected set;
+    val password: String,
 
     @Field
-    var nickname: String = nickname
-        protected set;
+    val nickname: String,
 
     @Field
-    var quit: Boolean = false
+    val quit: Boolean = false,
+
+    @MongoId
+    val id: ObjectId = ObjectId.get(),
+) : BaseDocumentEntity() {
 
 //    var posts: MutableList<Post> = mutableListOf()
 //        protected set;
 
-    fun updateNickname(nickname: String) {
-        this.nickname = nickname
-    }
-
-    fun withdraw() {
-        this.quit = true
-    }
+//    fun updateNickname(nickname: String) {
+//        this.nickname = nickname
+//    }
+//
+//    fun withdraw() {
+//        this.quit = true
+//    }
 
 //    override fun toString(): String {
 //        return "User(id=$id, email='$email', password='$password', nickname='$nickname', posts=$posts)"
 //    }
+
+
 }

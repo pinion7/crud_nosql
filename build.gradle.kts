@@ -18,9 +18,6 @@ repositories {
 
 allOpen {
 	annotation("org.springframework.data.mongodb.core.mapping.Document")
-	annotation("javax.persistence.Entity")
-	annotation("javax.persistence.MappedSuperclass")
-	annotation("javax.persistence.Embeddable")
 }
 
 dependencies {
@@ -35,11 +32,11 @@ dependencies {
 	implementation("io.jsonwebtoken:jjwt:0.9.1")
 	implementation("com.querydsl:querydsl-mongodb:5.0.0")
 	implementation("org.mongodb:mongo-java-driver:3.12.11")
-	implementation("org.mongodb:mongodb-driver-sync:4.7.1")
-	implementation("org.mongodb:mongodb-driver-core:4.7.1")
-	implementation("org.mongodb:bson:4.7.1")
+//	implementation("org.mongodb:mongodb-driver-sync:4.7.1")
+//	implementation("org.mongodb:mongodb-driver-core:4.7.1")
+//	implementation("org.mongodb:bson:4.7.1")
 //	testImplementation("org.testcontainers:mongodb:1.17.3")
-//	kapt("org.springframework.boot:spring-boot-configuration-processor")
+	kapt("org.springframework.boot:spring-boot-configuration-processor")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 

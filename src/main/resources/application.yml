@@ -1,14 +1,7 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://${properties.db.user}:${properties.db.password}@localhost:27020/${properties.db.name}
-#      authentication-database: admin
-#      host: localhost
-#      port: 8000
-#      username: ${properties.db.user}
-#      password: ${properties.db.password}
-#      database: ${properties.db.name}
-  #      replica-set-name: replicaSet
+      uri: mongodb+srv://${properties.db.user}:${properties.db.password}@cluster0.j0lz3tg.mongodb.net/${properties.db.name}?retryWrites=true&w=majority
 
   output:
     ansi:

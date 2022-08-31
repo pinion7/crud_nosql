@@ -15,6 +15,7 @@ class UserRepositoryTest @Autowired constructor(
 ) {
 
     @Test
+    @Rollback(false)
     fun testMongo() {
         // given
         val user = User("abc@naver.com", "1234", "실험쥐1")
